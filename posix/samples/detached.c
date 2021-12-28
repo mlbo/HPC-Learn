@@ -11,6 +11,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #define NUM_THREADS	4
 
 void *BusyWork(void *t)
@@ -38,7 +39,7 @@ pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
 
 for(t=0;t<NUM_THREADS;t++) {
    printf("Main: creating thread %ld\n", t);
-   rc = pthread_create(&thread[t], &attr, BusyWork, (void *)t); 
+   rc = pthread_create(&thread[t], NULL, BusyWork, (void *)t); 
    if (rc) {
      printf("ERROR; return code from pthread_create() is %d\n", rc);
      exit(-1);
