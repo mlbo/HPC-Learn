@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",   
+    "tasks":[  
+        {
+            "label": "build",      
+            "type": "shell",        
+            "command": "nvcc",       
+            "args":[
+                "-g",              
+                "${workspaceFolder}/${fileBasename}",    
+                "-o",                                   
+                "${workspaceFolder}/${fileBasenameNoExtension}",
+                "-I", "/usr/local/cuda/include",
+                "-L", "/usr/local/cuda/lib64",     
+                "-l", "cudart",                           
+                "-l", "cublas",
+                "-l", "cudnn",
+                "-l", "curand",
+                "-D_MWAITXINTRIN_H_INCLUDED"         
+
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "cmakebuild",      
+            "type": "shell", 
+            "command": "cd build && cmake ../ && make",    
+            "args": []
+        }
+    ] 
+}
